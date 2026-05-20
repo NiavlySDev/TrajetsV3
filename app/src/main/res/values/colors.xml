@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="send">#8BC34A</color>
+    <color name="reset">#00BCD4</color>
+    <color name="precedent">#F44336</color>
+    <color name="next">#4CAF50</color>
+    <color name="bus">#CDDC39</color>
+    <color name="metro">#FF9800</color>
+    <color name="tram">#8BC34A</color>
+    <color name="train">#5E69AB</color>
+    <color name="rer">#AAB536</color>
+    <color name="gare">#2196F3</color>
+    <color name="maman">#FF6398</color>
+    <color name="papa">#4BADFC</color>
+    <color name="purple_200">#FFFFFF</color>
+</resources>

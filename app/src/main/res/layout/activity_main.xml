@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".client.MainActivity">
+
+    <Button
+        android:id="@+id/Bouton_Precedent"
+        style="@style/ModernButtonRed"
+        android:text="Précédent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton_Envoyer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton10" />
+
+    <Button
+        android:id="@+id/Bouton_Suivant"
+        style="@style/ModernButtonGreen"
+        android:text="Suivant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Bouton_Envoyer"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton12" />
+
+    <Button
+        android:id="@+id/Bouton_Envoyer"
+        style="@style/ModernButtonPrimary"
+        android:text="Envoyer"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/Bouton_Reset"
+        style="@style/ModernButtonBlue"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton_Suivant"
+        app:layout_constraintStart_toEndOf="@+id/Bouton_Precedent"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton11" />
+
+    <Button
+        android:id="@+id/Bouton12"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton_Suivant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Bouton11"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton9" />
+
+    <Button
+        android:id="@+id/Bouton11"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton_Reset"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton12"
+        app:layout_constraintStart_toEndOf="@+id/Bouton10"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton8" />
+
+    <Button
+        android:id="@+id/Bouton10"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton_Precedent"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton7" />
+
+    <Button
+        android:id="@+id/Bouton9"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Bouton8"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton6" />
+
+    <Button
+        android:id="@+id/Bouton8"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton11"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton9"
+        app:layout_constraintStart_toEndOf="@+id/Bouton7"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton5" />
+
+    <Button
+        android:id="@+id/Bouton7"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton10"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton4" />
+
+    <Button
+        android:id="@+id/Bouton6"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Bouton5"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton3" />
+
+    <Button
+        android:id="@+id/Bouton5"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton8"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton6"
+        app:layout_constraintStart_toEndOf="@+id/Bouton4"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton2" />
+
+    <Button
+        android:id="@+id/Bouton4"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton7"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton1" />
+
+    <Button
+        android:id="@+id/Bouton3"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Bouton2"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton_Envoyer" />
+
+    <Button
+        android:id="@+id/Bouton2"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton5"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton3"
+        app:layout_constraintStart_toEndOf="@+id/Bouton1"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton_Envoyer" />
+
+    <Button
+        android:id="@+id/Bouton1"
+        style="@style/ModernButton"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton4"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bouton_Envoyer" />
+
+    <Switch
+        android:id="@+id/Switch_JeSuisA"
+        style="@style/ModernSwitch"
+        android:text="Je suis à"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/Switch_JeSuisDans"
+        style="@style/ModernSwitch"
+        android:text="Je suis dans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Switch_JeSuisA" />
+
+    <Switch
+        android:id="@+id/Switch_JeSuisAvec"
+        style="@style/ModernSwitch"
+        android:text="Je suis avec"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Switch_JeSuisDans" />
+
+    <Switch
+        android:id="@+id/Switch_JeSuisArrive"
+        style="@style/ModernSwitch"
+        android:text="Je suis arriver chez"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Switch_JeSuisAvec" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modern_textview_bg"
+        android:padding="16dp"
+        android:text="TextView"
+        android:textColor="#222"
+        android:textSize="18sp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/Bouton_Envoyer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Switch_JeSuisArrive" />
+
+    <Switch
+        android:id="@+id/Switch_Direction"
+        style="@style/ModernSwitch"
+        android:text="Direction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/Switch_Maman"
+        style="@style/ModernSwitch"
+        android:text="Maman"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Switch_Direction" />
+
+    <Switch
+        android:id="@+id/Switch_Papa"
+        style="@style/ModernSwitch"
+        android:text="Papa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Switch_Maman" />
+
+    <Switch
+        android:id="@+id/Switch_Patou"
+        style="@style/ModernSwitch"
+        android:text="Patou"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Switch_Papa" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
