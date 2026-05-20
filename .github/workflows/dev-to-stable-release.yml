@@ -38,7 +38,7 @@ jobs:
 
       - name: Push dev commit to stable
         run: |
-          git push origin HEAD:stable
+          git push https://x-access-token:${{ secrets.STABLE_PUSH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:stable
 
       - name: Prepare release info
         id: release
