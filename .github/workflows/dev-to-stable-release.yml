@@ -37,8 +37,15 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: Push dev commit to stable
+        env:
+          STABLE_DEPLOY_KEY: ${{ secrets.STABLE_DEPLOY_KEY }}
         run: |
-          git push https://x-access-token:${{ secrets.STABLE_PUSH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:stable
+          mkdir -p ~/.ssh
+          printf '%s\n' "$STABLE_DEPLOY_KEY" > ~/.ssh/stable_deploy_key
+          chmod 600 ~/.ssh/stable_deploy_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/stable_deploy_key -o IdentitiesOnly=yes" \
+            git push git@github.com:${{ github.repository }}.git HEAD:stable
 
       - name: Prepare release info
         id: release
