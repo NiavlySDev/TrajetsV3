@@ -11,18 +11,7 @@ import fr.niavlys.dev.trajets.metier.transports.*;
 public class SwitchJeSuisDans {
     public static void on() {
         MainActivity.addPrevisualisation("Je suis dans le ");
-        if(Switchs.Je_Suis_Arrive.getSwitch().isChecked()){
-            Switchs.Je_Suis_Arrive.getSwitch().setChecked(false);
-        }
-        if(Switchs.Je_Suis_Avec.getSwitch().isChecked()){
-            Switchs.Je_Suis_Avec.getSwitch().setChecked(false);
-        }
-        if(Switchs.Je_Suis_A.getSwitch().isChecked()){
-            Switchs.Je_Suis_A.getSwitch().setChecked(false);
-        }
-        if(Switchs.Direction.getSwitch().isChecked()){
-            Switchs.Direction.getSwitch().setChecked(false);
-        }
+        SwitchsListener.off();
 
         int a = 0;
         int nbpage = 1;

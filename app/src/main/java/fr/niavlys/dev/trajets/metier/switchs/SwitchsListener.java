@@ -17,18 +17,6 @@ public class SwitchsListener {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b) {
-                    if(Switchs.Je_Suis_Arrive.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Arrive.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_Avec.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Avec.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_Dans.getSwitch().isChecked()) {
-                        Switchs.Je_Suis_Dans.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Direction.getSwitch().isChecked()){
-                        Switchs.Direction.getSwitch().setChecked(false);
-                    }
                     MainActivity.addPrevisualisation("Je suis a ");
                     SwitchJeSuisAEtDirection.on();}
                 else {off();}
@@ -39,18 +27,6 @@ public class SwitchsListener {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    if(Switchs.Je_Suis_Arrive.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Arrive.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_Avec.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Avec.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_Dans.getSwitch().isChecked()) {
-                        Switchs.Je_Suis_Dans.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_A.getSwitch().isChecked()){
-                        Switchs.Je_Suis_A.getSwitch().setChecked(false);
-                    }
                     MainActivity.addPrevisualisation("direction: ");
                     SwitchJeSuisAEtDirection.on();
                 }
@@ -79,18 +55,6 @@ public class SwitchsListener {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b) {
                     MainActivity.addPrevisualisation("Je suis avec ");
-                    if(Switchs.Je_Suis_Arrive.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Arrive.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_A.getSwitch().isChecked()){
-                        Switchs.Je_Suis_A.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_Dans.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Dans.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Direction.getSwitch().isChecked()){
-                        Switchs.Direction.getSwitch().setChecked(false);
-                    }
                     SwitchJeSuisAvecEtArrive.on();
                 }
                 else {off();}
@@ -102,18 +66,6 @@ public class SwitchsListener {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b) {
                     MainActivity.addPrevisualisation("Je suis arrivé chez ");
-                    if(Switchs.Je_Suis_Avec.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Avec.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_A.getSwitch().isChecked()){
-                        Switchs.Je_Suis_A.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Je_Suis_Dans.getSwitch().isChecked()){
-                        Switchs.Je_Suis_Dans.getSwitch().setChecked(false);
-                    }
-                    if(Switchs.Direction.getSwitch().isChecked()){
-                        Switchs.Direction.getSwitch().setChecked(false);
-                    }
                     SwitchJeSuisAvecEtArrive.on();
                 }
                 else {off();}
@@ -132,4 +84,3 @@ public class SwitchsListener {
         BDD.hideAllBoutons();
     }
 }
-

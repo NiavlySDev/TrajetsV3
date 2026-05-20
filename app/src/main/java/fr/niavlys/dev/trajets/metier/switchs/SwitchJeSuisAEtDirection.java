@@ -10,6 +10,7 @@ import fr.niavlys.dev.trajets.metier.pages.Pages;
 
 public class SwitchJeSuisAEtDirection {
     public static void on(){
+        SwitchsListener.off();
         int a = 1;
         int nbpage = 1;
         Pages pages = BDD.getPages();
@@ -33,4 +34,3 @@ public class SwitchJeSuisAEtDirection {
         BDD.getPages().afficherPageBoutons(1);
     }
 }
-

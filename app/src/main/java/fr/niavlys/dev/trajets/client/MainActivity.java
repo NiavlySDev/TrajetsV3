@@ -50,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static void addPrevisualisation(String text) {
         String before = previsualisation.getText().toString();
-        String toadd = before+text;
+        String toadd = before;
+        if(!before.isEmpty() && !before.endsWith(" ") && !text.startsWith(" ")){
+            toadd += " ";
+        }
+        toadd += text;
         previsualisation.setText(toadd);
     }
 

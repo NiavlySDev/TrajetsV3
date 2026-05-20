@@ -10,6 +10,7 @@ import fr.niavlys.dev.trajets.metier.personnes.Personne;
 
 public class SwitchJeSuisAvecEtArrive {
     public static void on() {
+        SwitchsListener.off();
         int a = 1;
         int nbpage = 1;
         Pages pages = BDD.getPages();
