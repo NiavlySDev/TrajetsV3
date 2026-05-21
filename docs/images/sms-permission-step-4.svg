@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="900" viewBox="0 0 520 900">
+  <rect width="520" height="900" fill="#f6f8fc"/>
+  <circle cx="62" cy="58" r="34" fill="#dbeafe"/>
+  <path d="M44 64C66 64 76 34 104 30" fill="none" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="44" cy="64" r="8" fill="#10b981"/>
+  <text x="118" y="54" fill="#0f172a" font-family="Arial, sans-serif" font-size="34">Trajets</text>
+  <text x="118" y="84" fill="#64748b" font-family="Arial, sans-serif" font-size="20">Messages rapides et configurables</text>
+  <rect x="352" y="28" width="126" height="60" rx="16" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="379" y="66" fill="#0f172a" font-family="Arial, sans-serif" font-size="18">Paramètres</text>
+  <rect x="30" y="132" width="460" height="162" rx="18" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="48" y="166" fill="#64748b" font-family="Arial, sans-serif" font-size="18">Message</text>
+  <text x="48" y="228" fill="#64748b" font-family="Arial, sans-serif" font-size="24">Ton message apparaîtra ici</text>
+  <rect x="22" y="520" width="476" height="300" rx="28" fill="#242424"/>
+  <rect x="240" y="555" width="40" height="40" rx="7" fill="none" stroke="#9ca3af" stroke-width="4"/>
+  <text x="66" y="642" fill="#f8fafc" font-family="Arial, sans-serif" font-size="25" font-weight="bold">Autoriser Trajets à envoyer et</text>
+  <text x="105" y="674" fill="#f8fafc" font-family="Arial, sans-serif" font-size="25" font-weight="bold">afficher des SMS ?</text>
+  <rect x="60" y="714" width="400" height="64" rx="16" fill="#3b82f6"/>
+  <text x="210" y="756" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22">Autoriser</text>
+  <rect x="60" y="794" width="400" height="64" rx="16" fill="#525252"/>
+  <text x="176" y="836" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22">Ne pas autoriser</text>
+  <text x="32" y="880" fill="#334155" font-family="Arial, sans-serif" font-size="20">4. Reviens dans Trajets et appuie sur Autoriser.</text>
+</svg>

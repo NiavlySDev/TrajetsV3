@@ -129,6 +129,11 @@ class MainActivity : AppCompatActivity() {
         addView(secondaryButton("Paramètres").apply {
             setOnClickListener { startActivity(Intent(this@MainActivity, SettingsActivity::class.java)) }
         })
+        addView(secondaryButton("Aide SMS").apply {
+            setOnClickListener { startActivity(Intent(this@MainActivity, SmsPermissionHelpActivity::class.java)) }
+        }, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            setMargins(dp(8), 0, 0, 0)
+        })
     }
 
     private fun previewCard(): LinearLayout = LinearLayout(this).apply {

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Trajets"
         tools:targetApi="31">
         <activity
+            android:name=".client.SmsPermissionHelpActivity"
+            android:exported="false" />
+        <activity
             android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
