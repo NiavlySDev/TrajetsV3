@@ -1,5 +1,6 @@
 package fr.niavlys.dev.trajets.client
 
+import android.app.AlertDialog
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,10 +9,12 @@ import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.telephony.SmsManager
+import android.text.InputType
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -24,9 +27,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import fr.niavlys.dev.trajets.R
 import fr.niavlys.dev.trajets.config.AppConfig
+import fr.niavlys.dev.trajets.config.BlockType
 import fr.niavlys.dev.trajets.config.ConfigItem
 import fr.niavlys.dev.trajets.config.ConfigRepository
 import fr.niavlys.dev.trajets.config.ContactItem
+import fr.niavlys.dev.trajets.config.MessageBlock
+import fr.niavlys.dev.trajets.config.PresetItem
 import fr.niavlys.dev.trajets.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
@@ -142,11 +148,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun actionGrid(): GridLayout = GridLayout(this).apply {
         columnCount = 2
-        addAction("Je suis à", "Je suis à", { config.stations })
-        addAction("Je suis dans", "Je suis dans le", { config.transports })
-        addAction("Direction", "direction:", { config.stations })
+        addAction("Je suis à", "Je suis à", { config.stations.sortedItems() })
+        addTransportAction("Je suis dans", "Je suis dans le")
+        addAction("Direction", "direction:", { config.stations.sortedItems() })
         addAction("Je suis avec", "Je suis avec", ::contactsAsChoices)
         addAction("Je suis arrivé chez", "Je suis arrivé chez", ::contactsAsChoices)
+        addPresetAction("Messages", { config.messagePresets.sortedBy { it.order } })
+        addDelayAction()
     }
 
     private fun GridLayout.addAction(label: String, prefix: String, choices: () -> List<ConfigItem>) {
@@ -155,6 +163,37 @@ class MainActivity : AppCompatActivity() {
                 config = repository.load()
                 appendSegment(prefix)
                 renderChoices(choices())
+            }
+        }
+        addView(button, gridParams())
+    }
+
+    private fun GridLayout.addTransportAction(label: String, prefix: String) {
+        val button = secondaryButton(label).apply {
+            setOnClickListener {
+                config = repository.load()
+                appendSegment(prefix)
+                renderTransportChoices()
+            }
+        }
+        addView(button, gridParams())
+    }
+
+    private fun GridLayout.addPresetAction(label: String, presets: () -> List<PresetItem>) {
+        val button = secondaryButton(label).apply {
+            setOnClickListener {
+                config = repository.load()
+                renderPresetChoices(label, presets())
+            }
+        }
+        addView(button, gridParams())
+    }
+
+    private fun GridLayout.addDelayAction() {
+        val button = secondaryButton("Retard").apply {
+            setOnClickListener {
+                config = repository.load()
+                renderDelayChoices()
             }
         }
         addView(button, gridParams())
@@ -179,6 +218,107 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun renderTransportChoices() {
+        choicesContainer.removeAllViews()
+        choicesContainer.addView(sectionTitle("Choix"))
+
+        val categories = config.transportCategories.sortedBy { it.order }
+        val transports = config.transports.sortedItems()
+        if (transports.isEmpty()) {
+            choicesContainer.addView(emptyCard("Aucun transport configuré. Ajoute-le depuis Paramètres."))
+            return
+        }
+
+        categories.forEach { category ->
+            val categoryTransports = transports.filter { it.categoryId == category.id }
+            if (categoryTransports.isNotEmpty()) {
+                choicesContainer.addView(sectionTitle(category.label))
+                choicesContainer.addView(choiceGrid(categoryTransports))
+            }
+        }
+
+        val uncategorized = transports.filter { item -> categories.none { it.id == item.categoryId } }
+        if (uncategorized.isNotEmpty()) {
+            choicesContainer.addView(sectionTitle("Autres"))
+            choicesContainer.addView(choiceGrid(uncategorized))
+        }
+    }
+
+    private fun renderPresetChoices(title: String, presets: List<PresetItem>) {
+        choicesContainer.removeAllViews()
+        choicesContainer.addView(sectionTitle(title))
+        if (presets.isEmpty()) {
+            choicesContainer.addView(emptyCard("Aucun élément prédéfini. Ajoute-le depuis Paramètres."))
+            return
+        }
+
+        val grid = GridLayout(this).apply { columnCount = 1 }
+        choicesContainer.addView(grid, matchWrap())
+        presets.forEach { preset ->
+            val chip = chipButton(preset.label).apply {
+                setOnClickListener { appendSegment(renderPresetMessage(preset)) }
+            }
+            grid.addView(chip, gridParams())
+        }
+    }
+
+    private fun renderDelayChoices() {
+        choicesContainer.removeAllViews()
+        choicesContainer.addView(sectionTitle("Retard"))
+        choicesContainer.addView(emptyCard("Renseigne les minutes, la cause si besoin, puis choisis le transport."))
+        choicesContainer.addView(primaryButton("Créer un message de retard").apply {
+            setOnClickListener { showDelayDialog() }
+        }, marginLayout(top = 10))
+    }
+
+    private fun showDelayDialog() {
+        val minutes = EditText(this).apply {
+            hint = "Minutes de retard"
+            inputType = InputType.TYPE_CLASS_NUMBER
+            isSingleLine = true
+        }
+        val cause = EditText(this).apply {
+            hint = "Cause optionnelle"
+            isSingleLine = true
+        }
+        val form = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(8), dp(8), dp(8), 0)
+            addView(minutes, matchWrap())
+            addView(cause, matchWrap())
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Retard")
+            .setView(form)
+            .setNegativeButton("Annuler", null)
+            .setPositiveButton("Choisir le transport") { _, _ ->
+                val minuteValue = minutes.text.toString().toIntOrNull() ?: 0
+                val causeValue = cause.text.toString().trim()
+                renderTransportChoicesForDelay(minuteValue, causeValue)
+            }
+            .show()
+    }
+
+    private fun renderTransportChoicesForDelay(minutes: Int, cause: String) {
+        choicesContainer.removeAllViews()
+        choicesContainer.addView(sectionTitle("Transport concerné"))
+        choicesContainer.addView(choiceGrid(config.transports.sortedItems().map { item ->
+            item.copy(phrase = delayMessage(item.phrase, minutes, cause))
+        }))
+    }
+
+    private fun choiceGrid(choices: List<ConfigItem>): GridLayout =
+        GridLayout(this).apply {
+            columnCount = 2
+            choices.forEach { item ->
+                val chip = chipButton(item.label).apply {
+                    setOnClickListener { appendSegment(item.phrase) }
+                }
+                addView(chip, gridParams())
+            }
+        }
+
     private fun showEmptyChoices() {
         choicesContainer.removeAllViews()
         choicesContainer.addView(emptyCard("Choisis une action pour afficher les gares, transports ou personnes."))
@@ -191,7 +331,27 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        config.contacts.forEach { contact ->
+        val groups = config.contactGroups
+            .filter { it.contactIds.isNotEmpty() }
+            .sortedBy { it.order }
+        if (groups.isNotEmpty()) {
+            val groupGrid = GridLayout(this).apply { columnCount = 2 }
+            groups.forEach { group ->
+                val button = chipButton(group.label).apply {
+                    setOnClickListener {
+                        selectedContactIds += group.contactIds
+                        renderRecipients()
+                    }
+                }
+                groupGrid.addView(button, gridParams())
+            }
+            recipientsContainer.addView(groupGrid, matchWrap())
+            recipientsContainer.addView(muted("Ou sélectionne les personnes une par une.").apply {
+                setPadding(0, dp(8), 0, dp(4))
+            })
+        }
+
+        config.contacts.sortedBy { it.name }.forEach { contact ->
             val checkBox = CheckBox(this).apply {
                 text = "${contact.name}  ·  ${contact.phone}"
                 textSize = 16f
@@ -214,7 +374,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun contactsAsChoices(): List<ConfigItem> =
-        config.contacts.map { ConfigItem(it.id, it.name, it.name) }
+        config.contacts.sortedBy { it.name }.mapIndexed { index, contact ->
+            ConfigItem(contact.id, contact.name, contact.name, index)
+        }
+
+    private fun renderPresetMessage(preset: PresetItem): String =
+        preset.blocks.joinToString(" ") { block -> renderBlock(block) }.trim()
+
+    private fun renderBlock(block: MessageBlock): String = when (block.type) {
+        BlockType.TEXT, BlockType.ACTION -> block.text
+        BlockType.TRANSPORT -> config.transports.firstOrNull { it.id == block.itemId }?.phrase.orEmpty()
+        BlockType.STATION -> config.stations.firstOrNull { it.id == block.itemId }?.phrase.orEmpty()
+        BlockType.CONTACT -> config.contacts.firstOrNull { it.id == block.itemId }?.name.orEmpty()
+        BlockType.DELAY -> {
+            val transport = config.transports.firstOrNull { it.id == block.itemId }?.phrase
+            delayMessage(transport.orEmpty(), block.minutes, block.text)
+        }
+    }
+
+    private fun delayMessage(transport: String, minutes: Int, cause: String): String {
+        val base = "Le transport ${transport.trim()} a un retard de $minutes minutes"
+        val cleanCause = cause.trim()
+        return if (cleanCause.isBlank()) base else "$base à cause de $cleanCause"
+    }
+
+    private fun List<ConfigItem>.sortedItems(): List<ConfigItem> =
+        sortedWith(compareBy<ConfigItem> { it.order }.thenBy { it.label.lowercase() })
 
     private fun appendSegment(segment: String) {
         val value = segment.trim()
