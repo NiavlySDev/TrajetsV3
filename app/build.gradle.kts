@@ -37,3 +37,17 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
+
+tasks.register<Exec>("installAndRunDebug") {
+    group = "install"
+    description = "Installs the debug APK and launches the app."
+    dependsOn("installDebug")
+    commandLine(
+        "adb",
+        "shell",
+        "am",
+        "start",
+        "-n",
+        "fr.niavlys.dev.trajets/.client.MainActivity"
+    )
+}
